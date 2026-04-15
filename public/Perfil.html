@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+    <title>Perfil do Usuário</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#2d1b5e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="icons/icon.svg" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="JS/firebaseconfig.js"></script>
+    <link rel="stylesheet" href="CSS/menu.css" />
+    <link rel="stylesheet" href="CSS/Perfil.css" />
+
+
+  </head>
+
+  <body>
+    <header>
+      <h1>Trabalho especial com carrinho</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Perfil.html" id="link-perfil">Perfil</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="main">
+
+      <h1>Perfil do Usuário</h1>
+
+      <!-- perfil.html -->
+      <section class="perfil-info">
+        <h2>Informações do Usuário</h2>
+        <p><strong>Nome:</strong> <span id="nomeUsuario"></span></p>
+        <p><strong>Email:</strong> <span id="emailUsuario"></span></p>
+      </section>
+
+      <section class="agendamentos">
+        <h2>Histórico de Agendamentos</h2>
+        <label for="selectMesAgendamento">Escolha um mês:</label>
+        <select id="selectMesAgendamento"></select>
+        <button id="btnMostrarAgendamentos"> Agendamentos</button>
+        <ul id="agendamentos"></ul>
+      </section>
+
+      <section class="relatorios">
+        <h2>Histórico de Relatórios</h2>
+        <label for="selectMes">Escolha um mês:</label>
+        <select id="selectMes">
+          <!-- Opções de mês serão adicionadas dinamicamente pelo JavaScript -->
+        </select>
+        <button id="btnMostrarRelatorios"> Relatórios</button>
+
+        <ul id="relatorios"></ul>
+      </section>
+
+
+    </div>
+
+    <footer>
+      <nav>
+        <ul>
+          <li><a href="#" id="logout" class="botao">Sair</a></li>
+          <li><a href="Editar_perfil.html" class="botao">Editar Perfil</a></li>
+          <li> <a href="index.html" class="botao">Voltar ao Início</a></li>
+        </ul>
+      </nav>
+    </footer>
+    <script src="JS/Perfilagendamento.js"></script>
+    <script src="JS/Perfilrelatorio.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const nomeUsuarioElement = document.getElementById("nomeUsuario");
+        const emailUsuarioElement = document.getElementById("emailUsuario");
+
+        firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            nomeUsuarioElement.textContent =
+              user.displayName || "Nome não definido";
+
+            emailUsuarioElement.textContent =
+              user.email || "E-mail não definido";
+
+            const userId = user.uid;
+            const databaseRef = firebase.database().ref("usuarios/" + userId);
+            databaseRef
+              .once("value")
+              .then(function (snapshot) {
+                const userData = snapshot.val();
+                if (userData && userData.nomeCompleto) {
+                  nomeUsuarioElement.textContent = userData.nomeCompleto;
+                } else {
+                  nomeUsuarioElement.textContent = "Usuário";
+                }
+              })
+              .catch(function (error) {
+                console.error("Erro ao recuperar os dados do usuário:", error);
+              });
+          } else {
+            nomeUsuarioElement.textContent = "Usuário não autenticado";
+            emailUsuarioElement.textContent = "";
+          }
+        });
+
+        const logoutLink = document.getElementById("logout");
+        logoutLink.addEventListener("click", function () {
+          firebase
+            .auth()
+            .signOut()
+            .then(function () {
+              console.log("Usuário deslogado com sucesso.");
+              window.location.href = "index.html";
+            })
+            .catch(function (error) {
+              console.error("Erro ao fazer logout:", error);
+            });
+        });
+      });
+    </script>
+    <style>
+      p {
+        color: #090de7;
+      }
+    </style>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+  </body>
+
+</html>

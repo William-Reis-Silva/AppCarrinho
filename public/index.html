@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <title>Trabalho com Carrinho</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#2d1b5e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="icons/icon.svg" />
+    <link rel="stylesheet" href="CSS/Home.css" />
+    <link rel="stylesheet" href="CSS/menu.css" />
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.1.1/build/global/luxon.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="JS/firebaseconfig.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+    <header>
+      <h1>Trabalho especial com carrinho</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="Agenda.html" id="link-agendar">Agendamento</a></li>
+          <li><a href="Perfil.html" id="link-perfil">Perfil</a></li>
+        </ul>
+      </nav>
+    </header>
+      <div id="mensagem-acesso-negado">
+        <p>
+          Oops! Parece que você não tem permissão para acessar esta página. Por
+          favor, faça login para continuar.
+        </p>
+      </div>
+
+      <div id="user-greeting">Bem-vindo, <span id="username"></span></div>
+
+      <main>
+ 
+          <h2>Testemunho Público com Carrinho</h2>
+
+
+        <section id="agendamentos">
+          <h2>Agendamentos</h2>
+
+          <h3 id="tituloAgendamentos">Agendamentos da Semana</h3>
+          <ul class="lista-agendamentos">
+            <!-- Agendamentos da semana serão inseridos automaticamente aqui -->
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+       2024 Testemunho Público com Carrinho
+      </footer>
+    </div>
+    <script src="JS/Index.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+  </body>
+</html>

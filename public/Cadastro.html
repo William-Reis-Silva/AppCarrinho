@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#2d1b5e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="icons/icon.svg" />
+    <title>Cadastro</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <link rel="stylesheet" type="text/css" href="CSS/Login.css" />
+    <script src="JS/firebaseconfig.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+    <form id="cadastro-form">
+      <h1>Cadastro de Usuário</h1>
+
+      <input
+        type="text"
+        id="nomeCompleto"
+        name="nomeCompleto"
+        placeholder="Nome Completo"
+        required />
+      <input
+        type="text"
+        id="usuário"
+        name="usuário"
+        placeholder="Nome de usuário"
+        required />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email"
+        required />
+      <input
+        type="password"
+        id="senha"
+        name="senha"
+        placeholder="Senha"
+        required />
+      <input
+        type="password"
+        id="confirmarSenha"
+        name="confirmarSenha"
+        placeholder="Confirmar Senha"
+        required />
+      <div id="mensagem-erro"></div>
+      <div id="mensagem-sucesso"></div>
+
+      <br />
+      <button type="submit">Cadastrar</button>
+    </form>
+    </div>
+
+    <script src="JS/Cadastro.js"></script>
+
+    <style>
+      p {
+        font-size: 20px;
+        color: blue;
+      }
+    </style>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+  </body>
+</html>

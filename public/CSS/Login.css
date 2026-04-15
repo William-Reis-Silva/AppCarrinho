@@ -1,0 +1,248 @@
+@import url('menu.css');
+
+/* ========================================
+   LOGIN E CADASTRO
+   Depende de menu.css para variáveis e fontes
+   ======================================== */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--bg-page);
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 40px 16px;
+}
+
+/* Card compartilhado por login e cadastro */
+#login-form,
+#cadastro-form {
+    background: var(--bg-card);
+    padding: 28px 24px;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(45,27,94,0.15);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    border-top: 4px solid var(--bg-dark-mid);
+}
+
+#login-form h1,
+#cadastro-form h1 {
+    font-family: "Merriweather", serif;
+    color: var(--text-dark);
+    font-size: 1.4em;
+    margin-bottom: 4px;
+    border: none;
+}
+
+/* Linha dourada sob o título */
+#login-form h1::after,
+#cadastro-form h1::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 3px;
+    background: var(--gold);
+    margin: 8px auto 20px;
+    border-radius: 2px;
+}
+
+/* Inputs */
+#login-form input,
+#cadastro-form input {
+    width: 100%;
+    margin: 0 0 14px 0;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border-input);
+    border-radius: 7px;
+    background: var(--bg-input);
+    font-size: 0.95em;
+    color: var(--text-dark);
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+#login-form input:focus,
+#cadastro-form input:focus {
+    outline: none;
+    border-color: var(--bg-dark-mid);
+    box-shadow: 0 0 0 3px rgba(45,27,94,0.1);
+}
+
+/* Botão de submit */
+#login-form button[type="submit"],
+#cadastro-form button[type="submit"] {
+    width: 100%;
+    margin: 4px 0 0;
+    padding: 11px;
+    background: linear-gradient(135deg, var(--bg-dark-mid), var(--bg-dark-light));
+    color: var(--text-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(45,27,94,0.3);
+    transition: all 0.2s;
+}
+
+#login-form button[type="submit"]:hover,
+#cadastro-form button[type="submit"]:hover {
+    background: linear-gradient(135deg, var(--bg-dark-light), var(--bg-dark-mid));
+    color: var(--gold);
+}
+
+/* Botão Voltar */
+.botao-voltar {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 9px 22px;
+    background: transparent;
+    color: var(--text-dark);
+    border: 1.5px solid var(--border-input);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: all 0.2s;
+}
+
+.botao-voltar:hover {
+    border-color: var(--bg-dark-mid);
+    color: var(--bg-dark-mid);
+}
+
+/* Links */
+.container > p {
+    margin-top: 14px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    width: auto;
+    box-shadow: none;
+    padding: 0;
+}
+
+.container > p a {
+    color: var(--bg-dark-mid);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.container > p a:hover {
+    color: var(--gold);
+}
+
+/* Mensagens */
+#error-message {
+    color: var(--color-error);
+    font-size: 0.85em;
+    margin-top: 8px;
+    min-height: 20px;
+}
+
+#mensagem-sucesso {
+    color: var(--color-success);
+    font-size: 0.85em;
+    margin-top: 8px;
+}
+
+/* ========================================
+   SEÇÃO DE RECUPERAÇÃO DE SENHA
+   ======================================== */
+
+#recuperar-senha-section {
+    display: none;
+    background: var(--bg-card);
+    padding: 28px 24px;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(45,27,94,0.15);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    border-top: 4px solid var(--gold);
+}
+
+#recuperar-senha-section h2 {
+    font-family: "Merriweather", serif;
+    color: var(--text-dark);
+    font-size: 1.2em;
+    border: none;
+    margin-bottom: 6px;
+    padding: 0;
+}
+
+#recuperar-senha-section h2::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 3px;
+    background: var(--gold);
+    margin: 8px auto 16px;
+    border-radius: 2px;
+}
+
+#recuperar-senha-section p {
+    font-size: 0.88em;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    box-shadow: none;
+    width: 100%;
+    padding: 0;
+}
+
+#recuperar-senha-section input[type="email"] {
+    width: 100%;
+    padding: 10px 14px;
+    margin: 0 0 14px 0;
+    border: 1.5px solid var(--border-input);
+    border-radius: 7px;
+    background: var(--bg-input);
+    font-size: 0.95em;
+    box-sizing: border-box;
+}
+
+#btn-enviar-recuperacao {
+    width: 100%;
+    margin: 0 0 10px;
+    padding: 11px;
+    background: linear-gradient(135deg, var(--bg-dark-mid), var(--bg-dark-light));
+    color: var(--text-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(45,27,94,0.3);
+    transition: all 0.2s;
+}
+
+#btn-enviar-recuperacao:hover {
+    color: var(--gold);
+}
+
+#msg-recuperacao {
+    font-size: 0.85em;
+    margin-top: 8px;
+    min-height: 20px;
+}
+
+#link-voltar-login,
+#link-recuperar-senha {
+    color: var(--bg-dark-mid);
+    font-size: 0.85em;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#link-voltar-login:hover,
+#link-recuperar-senha:hover {
+    color: var(--gold);
+}

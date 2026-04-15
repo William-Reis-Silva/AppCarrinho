@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <title>Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#2d1b5e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="icons/icon.svg" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="JS/firebaseconfig.js"></script>
+    <link rel="stylesheet" href="CSS/Login.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <form id="login-form">
+        <h1>Login</h1>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          required
+        />
+        <input
+          type="password"
+          id="login-senha"
+          name="login-senha"
+          placeholder="Senha"
+          required
+        />
+        <button type="submit">Entrar</button>
+        <a href="index.html" class="botao-voltar">Voltar ao Início</a>
+      </form>
+      <p id="error-message"></p>
+      <p><a href="#" id="link-recuperar-senha">Esqueceu sua senha?</a></p>
+
+      <div id="recuperar-senha-section">
+        <h2>Recuperar Senha</h2>
+        <p>Digite seu email cadastrado para receber o link de redefinição.</p>
+        <input type="email" id="email-recuperacao" placeholder="Seu email" />
+        <button id="btn-enviar-recuperacao">Enviar email de recuperação</button>
+        <p id="msg-recuperacao"></p>
+        <p><a href="#" id="link-voltar-login">Voltar ao login</a></p>
+      </div>
+
+      <p>
+        Ainda não tem uma conta? <a href="Cadastro.html">Cadastre-se aqui</a>
+      </p>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("login-form");
+        const errorMessageElement = document.getElementById("error-message");
+        const recuperarSection = document.getElementById("recuperar-senha-section");
+        const linkRecuperar = document.getElementById("link-recuperar-senha");
+        const linkVoltarLogin = document.getElementById("link-voltar-login");
+        const btnEnviar = document.getElementById("btn-enviar-recuperacao");
+        const msgRecuperacao = document.getElementById("msg-recuperacao");
+
+        // Alterna para a seção de recuperação
+        linkRecuperar.addEventListener("click", function (e) {
+          e.preventDefault();
+          form.style.display = "none";
+          recuperarSection.style.display = "block";
+          errorMessageElement.textContent = "";
+        });
+
+        // Volta para o formulário de login
+        linkVoltarLogin.addEventListener("click", function (e) {
+          e.preventDefault();
+          recuperarSection.style.display = "none";
+          form.style.display = "block";
+          msgRecuperacao.textContent = "";
+          document.getElementById("email-recuperacao").value = "";
+        });
+
+        // Envia o email de recuperação
+        btnEnviar.addEventListener("click", function () {
+          const email = document.getElementById("email-recuperacao").value.trim();
+          if (!email) {
+            msgRecuperacao.style.color = "red";
+            msgRecuperacao.textContent = "Por favor, informe seu email.";
+            return;
+          }
+
+          firebase.auth().sendPasswordResetEmail(email)
+            .then(function () {
+              msgRecuperacao.style.color = "green";
+              msgRecuperacao.textContent = "Se este email estiver cadastrado, você receberá um link de recuperação.";
+              document.getElementById("email-recuperacao").value = "";
+            })
+            .catch(function (error) {
+              msgRecuperacao.style.color = "green";
+              msgRecuperacao.textContent = "Se este email estiver cadastrado, você receberá um link de recuperação.";
+            });
+        });
+
+        // Login
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const email = form.email.value;
+          const senha = form["login-senha"].value;
+
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(email, senha)
+            .then((userCredential) => {
+              window.location.href = "index.html";
+            })
+            .catch((error) => {
+              console.error("Erro ao fazer login:", error);
+              errorMessageElement.textContent =
+                "Email ou senha incorretos. Por favor, tente novamente.";
+            });
+        });
+      });
+    </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+  <head>
+    <title>Agendar Trabalho com Carrinho</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#2d1b5e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="icons/icon.svg" />
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.1.1/build/global/luxon.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="JS/firebaseconfig.js"></script>
+    <link rel="stylesheet" href="CSS/menu.css" />
+    <link rel="stylesheet" href="CSS/Agenda.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Trabalho especial com carrinho</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Perfil.html" id="link-perfil">Perfil</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="main">
+        <h1>Agendamentos</h1>
+        <form id="agendamento-form">
+          <label for="local">Local:</label>
+          <select id="local" name="local" required>
+            <option value="">Local</option>
+            <option value="Feira Timirim">Feira Timirim</option>
+            <option value="Praça Olaria">Praça Olaria</option>
+            <option value="Praça Coliseu">Praça Coliseu</option>
+            <option value="Praça do Coreto">Praça do Coreto</option>
+            <option value="Cemitério">Cemitério</option>
+          </select>
+          <hr />
+          <label for="selectedDate">Data do Agendamento:</label>
+          <input type="date" id="selectedDate" name="selectedDate" required /><br />
+          <label>Dia da Semana:</label>
+          <input type="text" id="diaSemana" readonly /><br />
+          <hr />
+          <label for="hora">Hora:</label>
+          <div id="camposHoraPersonalizada" style="display: none; display: flex; gap: 20px; margin: 0 40px;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <label for="horaInicio">Início:</label>
+              <input type="time" id="horaInicio" name="horaInicio" style="width: 120px;" required />
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <label for="horaFim">Fim:</label>
+              <input type="time" id="horaFim" name="horaFim" style="width: 120px;" required />
+            </div>
+          </div>
+
+          <hr />
+          <label for="nomePublicador">Nome do Publicador:</label>
+          <input type="text" id="nomePublicador" name="nomePublicador" required readonly /><br />
+
+          <label for="nomeCompanheiro">Nome do Companheiro:</label>
+          <input type="text" id="nomeCompanheiro" name="nomeCompanheiro" required />
+          <span id="autocomplete-list"></span>
+          <hr />
+          <div id="vagas">
+            <div id="infoVagas" class="info-vagas"></div>
+            <label for="carrinho">Carrinho:</label>
+            <select id="carrinho" name="carrinho" required>
+              <option value="">Selecione um carrinho</option>
+            </select>
+          </div>
+          <div class="container-botoes">
+            <button type="submit">Salvar</button>
+          </div>
+        </form>
+        <div id="noAvailabilityModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Sem vagas disponíveis para o horário selecionado. Por favor, escolha outro horário.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <script src="JS/script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+
+  </body>
+
+</html>

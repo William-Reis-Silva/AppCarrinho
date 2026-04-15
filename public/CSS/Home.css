@@ -1,0 +1,96 @@
+@media (max-width: 600px) {
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    nav a {
+        margin: 5px 0;
+        font-size: 12px;
+    }
+}
+
+h2, h3 {
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.dia-agendamento {
+    background: linear-gradient(90deg, var(--bg-dark-mid), var(--bg-dark-light));
+    color: var(--text-white);
+    font-family: "Merriweather", serif;
+    font-size: 1em;
+    font-weight: 700;
+    text-align: left;
+    padding: 8px 14px;
+    margin: 14px 0 6px;
+    border-radius: 8px;
+    list-style: none;
+}
+
+.dia-agendamento strong {
+    color: var(--text-white);
+}
+
+.lista-agendamentos {
+    padding: 0 16px;
+    list-style: none;
+}
+
+.lista-agendamentos li:not(.dia-agendamento) {
+    border-left: 3px solid var(--gold);
+    padding: 8px 12px;
+    margin-bottom: 4px;
+    background: var(--bg-highlight);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9em;
+    color: var(--text-dark);
+}
+
+.lista-agendamentos li button {
+    background: linear-gradient(135deg, var(--bg-dark-mid), var(--bg-dark-light));
+    color: var(--text-white);
+    padding: 5px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-top: 4px;
+}
+
+.lista-agendamentos li button:hover {
+    color: var(--gold);
+}
+
+#user-greeting {
+    background: linear-gradient(90deg, #3d2070, var(--bg-dark-mid));
+    color: var(--text-white-dim);
+    padding: 8px 20px;
+    font-size: 0.9em;
+    display: none;
+}
+
+#username {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+#mensagem-acesso-negado {
+    display: none;
+    margin: 16px auto;
+    padding: 12px 20px;
+    background: #fff8e1;
+    color: #7d5a00;
+    border: 1px solid #ffe082;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 600px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
